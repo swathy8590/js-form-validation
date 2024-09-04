@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        @font-face {
+            font-family: "poppins";
+            src: url(fonds/Poppins-Regular.ttf);
+        }
+
+        button {
+            border: none;
+            color: #ffffff;
+            background: #a91079;
+            width: 80px;
+            height: 33px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .parent {
+            padding: 10px;
+            width: 60%;
+            height: 70vh;
+            background-color: #a91079;
+            margin: auto;
+            border-radius: 20px;
+            font-family: "poppins";
+            color: #ffffff;
+        }
+
+
+        .formbox {
+            width: 100%;
+            display: flex;
+            color: #000000;
+
+        }
+
+        .btnBox {
+            text-align: center;
+        }
+
+        input {
+            width: 90%;
+            height: 30px;
+            border: 1px solid #a91079;
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        form {
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 20px 0 0 20px;
+            box-sizing: border-box;
+            width: 55%;
+            margin: auto;
+        }
+
+        .heading {
+            text-align: center;
+        }
+
+
+        @media screen and (max-width:1000px) {
+            form {
+                width: 90%;
+
+            }
+
+            .parent {
+                padding: 20px;
+                width: 80%;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="parent">
+        <h2 class="heading">FORM VALIDATION</h2>
+        <div class="formbox">
+            <form name="main">
+                <label> Name </label><br>
+                <input name="namin" onkeyup="namefn()" />
+                <div class="name"></div>
+
+                <label>Email</label><br>
+                <input name="malin" onkeyup="mailfn()" />
+                <div class="mail"></div>
+
+                <label>Passoword</label><br>
+                <input name="pswdin" onkeyup="pswdfn()" />
+                <div class="pswd"></div>
+
+                <div class="btnBox"> <button type="submit" id="btn">Submit</button></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Name function
+
+        function namefn() {
+            var n = document.forms["main"]["namin"].value;
+            var x = /^(?=.*[a-z])(.{2,10})/gi;
+
+            if (x.test(n) == true) {
+                document.querySelector(".name").innerHTML = "name is correct"
+                document.querySelector(".name").style.color = "green"
+                document.forms["main"]["namin"].style.border = " 2px solid green"
+
+            } else {
+                document.querySelector(".name").innerHTML = "At least 2 character"
+                document.querySelector(".name").style.color = "red"
+                document.forms["main"]["namin"].style.border = " 2px solid red"
+            }
+        }
+
+        // Email function
+        function mailfn() {
+            var m = document.forms["main"]["malin"].value;
+            var y = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/gi
+
+            if (y.test(m) == true) {
+                document.querySelector(".mail").innerHTML = "Email is correct"
+                document.querySelector(".mail").style.color = "green"
+                document.forms["main"]["malin"].style.border = " 2px solid green"
+            } else {
+                document.querySelector(".mail").innerHTML = "incorrect"
+                document.querySelector(".mail").style.color = "red"
+                document.forms["main"]["malin"].style.border = " 2px solid red"
+            }
+        }
+
+        //Password function
+
+        function pswdfn() {
+            var p = document.forms["main"]["pswdin"].value;
+            var z = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])(.{6,})/gi
+
+            if (z.test(p) == true) {
+                document.querySelector(".pswd").innerHTML = "password is correct"
+                document.querySelector(".pswd").style.color = "green"
+                document.forms["main"]["pswdin"].style.border = " 2px solid green"
+            } else {
+                document.querySelector(".pswd").innerHTML = "At least 1 letter, At least 1 number ,At least 1 special character,minimum 6 charactors"
+                document.querySelector(".pswd").style.color = "red"
+                document.forms["main"]["pswdin"].style.border = " 2px solid red"
+            }
+        }
+
+        //Submition 
+
+        document.querySelector("form").addEventListener("submit", (e) => {
+            var n = document.forms["main"]["namin"].value;
+            var m = document.forms["main"]["malin"].value;
+            var p = document.forms["main"]["pswdin"].value;
+
+
+            var x = /^(?=.*[a-z])(.{2,10})/gi.test(n)
+            var y = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/gi.test(m)
+            var z = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])(.{6,})/gi.test(p)
+            if (!x == true || !y == true || !z == true) {
+                e.preventDefault()
+                alert("something is missing")
+
+            }
+        })
+
+    </script>
+</body>
+
+</html>
